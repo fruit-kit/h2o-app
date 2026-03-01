@@ -19,6 +19,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="JFH-1v-Kjr" kind="relationship" relationship="viewControllers" id="dvU-yG-Ia8"/>
+                        <segue destination="P2M-Nr-7ho" kind="relationship" relationship="viewControllers" id="KlT-aX-ZiM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NYS-Rt-rj2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -29,7 +30,7 @@
         <scene sceneID="NBl-p1-aJn">
             <objects>
                 <navigationController id="JFH-1v-Kjr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="w71-1F-UOA"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="drop" catalog="system" selectedImage="drop.fill" id="w71-1F-UOA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bgq-Aw-6bu">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -40,7 +41,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9P-ki-C9a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-784" y="25"/>
+            <point key="canvasLocation" x="-874" y="-266"/>
         </scene>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
@@ -56,12 +57,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="25"/>
+            <point key="canvasLocation" x="24" y="-266"/>
+        </scene>
+        <!--Goal-->
+        <scene sceneID="A0w-Ac-Nw9">
+            <objects>
+                <navigationController id="P2M-Nr-7ho" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Goal" image="star" catalog="system" selectedImage="star.fill" id="jlG-jf-q4h"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Ei-EK-em9">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="diO-Mn-zd9" kind="relationship" relationship="rootViewController" id="7dF-7Y-kjd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bba-CG-Kep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-874" y="417"/>
+        </scene>
+        <!--GoalVC-->
+        <scene sceneID="RHr-A6-C13">
+            <objects>
+                <viewController id="diO-Mn-zd9" customClass="GoalVC" customModule="H2O" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="B72-Yh-q6p">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ulB-7s-lXR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jjD-h5-PY1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hiX-fi-P3p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24" y="417"/>
         </scene>
     </scenes>
     <resources>
-        <image name="house" catalog="system" width="128" height="104"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="drop" catalog="system" width="96" height="128"/>
+        <image name="drop.fill" catalog="system" width="96" height="128"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GoalVC.swift
 //  H2O
 //
 //  Created by Robert Kotrutsa on 01.03.26.
@@ -7,20 +7,18 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class GoalVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fillHomeVC()
+
+        fillGoalVC()
     }
     
-    private func fillHomeVC() {
-        navigationItem.title = "H₂O"
-        navigationController?.title = "H₂O"
+    private func fillGoalVC() {
+        navigationItem.title = "Goal"
+        navigationController?.title = "Goal"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-
-
+    
 }
-
