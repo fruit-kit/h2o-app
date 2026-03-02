@@ -9,7 +9,7 @@ import UIKit
 
 class GoalVC: UIViewController {
     
-    var currentGoal = 0
+    var currentGoal = 2_000
     
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var setGoalOutlet: UIButton!
@@ -34,11 +34,28 @@ class GoalVC: UIViewController {
     }
     
     @IBAction func setGoalButton(_ sender: UIButton) {
-        print(#function)
+        let alertController = UIAlertController(title: "Set goal", message: nil, preferredStyle: .alert)
+        let actionButton = UIAlertAction(title: "OK", style: .default) { _ in
+            let customeGoal = alertController.textFields?.first?.text ?? ""
+            if let customeGoal = Int(customeGoal),
+               customeGoal > 0 {
+                self.currentGoal = customeGoal
+                self.goalLabel.text = "Current goal \(self.currentGoal)ml"
+            }
+        }
+        let cancelButton = UIAlertAction(title: "cancel", style: .cancel)
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+            textField.placeholder = "ml"
+        }
+        alertController.addAction(actionButton)
+        alertController.addAction(cancelButton)
+        present(alertController, animated: true)
     }
     
     @IBAction func resetToDefaultButton(_ sender: UIButton) {
-        print(#function)
+        self.currentGoal = 2_000
+        self.goalLabel.text = "Current goal \(self.currentGoal)ml"
     }
     
 }
