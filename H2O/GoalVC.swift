@@ -9,12 +9,12 @@ import UIKit
 
 class GoalVC: UIViewController {
     
+    var currentGoal = 0
     
     @IBOutlet weak var goalLabel: UILabel!
-    
     @IBOutlet weak var setGoalOutlet: UIButton!
-    
     @IBOutlet weak var resetToDefaultOutlet: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,15 +22,15 @@ class GoalVC: UIViewController {
     }
     
     private func fillGoalVC() {
-        self.goalLabel.text = "Current goal 2000ml"
-        self.goalLabel.font = .systemFont(ofSize: CGFloat(23))
+        self.goalLabel.text = "Current goal \(self.currentGoal)ml"
+        self.goalLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
         
         navigationItem.title = "Goal"
         navigationController?.title = "Goal"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        self.setGoalOutlet.setTitle("Set goal", for: .normal)
-        self.resetToDefaultOutlet.setTitle("Reset to default", for: .normal)
+        self.setGoalOutlet.applyStyle(title: "Set goal", normalColor: .white, highlightedColor: .gray)
+        self.resetToDefaultOutlet.applyStyle(title: "Reset to default", normalColor: .systemPink, highlightedColor: .gray)
     }
     
     @IBAction func setGoalButton(_ sender: UIButton) {

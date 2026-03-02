@@ -297,7 +297,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="6zj-JO-mhb"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="setGoalButton:" destination="diO-Mn-zd9" eventType="touchUpInside" id="sG2-tc-GjG"/>
                                                 </connections>
@@ -320,7 +320,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="klc-gq-Ywy"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                 <connections>
                                                     <action selector="resetToDefaultButton:" destination="diO-Mn-zd9" eventType="touchUpInside" id="UF6-z8-tni"/>
                                                 </connections>
