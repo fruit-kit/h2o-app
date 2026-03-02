@@ -40,17 +40,16 @@ class HomeVC: UIViewController {
     private func setupProgressLabel() {
         updateProgressLabel()
         self.progressLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
-        self.progressLabel.textColor = .bluePrimary
     }
     
     // MARK: Setup buttons
     private func setupButtons() {
-        setup(button: self.drink100MlOutlet, title: "Drink 100ml", color: .bluePrimary)
-        setup(button: self.drink200MlOutlet, title: "Drink 200ml", color: .bluePrimary)
-        setup(button: self.drink300MlOutlet, title: "Drink 300ml", color: .bluePrimary)
-        setup(button: self.customeVolumeOutlet, title: "Custome volume", color: .bluePrimary)
-        setup(button: self.undoLastOutlet, title: "Undo last add", color: .redPrimary)
-        setup(button: self.resetAllDayOutlet, title: "Reset all day", color: .redPrimary)
+        setup(button: self.drink100MlOutlet, title: "Drink 100ml")
+        setup(button: self.drink200MlOutlet, title: "Drink 200ml")
+        setup(button: self.drink300MlOutlet, title: "Drink 300ml")
+        setup(button: self.customeVolumeOutlet, title: "Custome volume")
+        setup(button: self.undoLastOutlet, title: "Undo last add")
+        setup(button: self.resetAllDayOutlet, title: "Reset all day")
     }
     
     // MARK: Update progress label
@@ -59,11 +58,12 @@ class HomeVC: UIViewController {
         progressLabel.text = "Progress: \(currentVolume) / \(goalVolume)ml (\(Int(percent))%)"
     }
     
-    private func setup(button: UIButton, title: String, color: UIColor) {
+    private func setup(button: UIButton, title: String) {
         button.setTitle(title, for: .normal)
-        button.setTitleColor(color, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.systemGray, for: .highlighted)
         button.layer.borderWidth = 1.5
-        button.layer.borderColor = color.cgColor
+        button.layer.borderColor = UIColor.white.cgColor
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {
@@ -85,7 +85,21 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func customeVolumeButton(_ sender: UIButton) {
-        print(#function)
+        let alertController = UIAlertController(title: "Enter the volume in ml", message: nil, preferredStyle: .alert)
+        let actionButton = UIAlertAction(title: "OK", style: .default) { _ in
+            let customeVolume = alertController.textFields?.first?.text ?? ""
+            if let customeVolume = Int(customeVolume),
+               customeVolume > 0 {
+                self.lastAdd = customeVolume
+                self.currentVolume = self.lastAdd
+                self.updateProgressLabel()
+            }
+        }
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        alertController.addAction(actionButton)
+        self.present(alertController, animated: true)
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
