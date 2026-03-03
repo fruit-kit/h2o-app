@@ -9,14 +9,20 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    private var currentVolume = 0
+    private var currentVolume: Int {
+        get {
+            UserDefaults.standard.integer(forKey: "currentVolume")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "currentVolume")
+        }
+    }
     private var goal: Int {
         return UserDefaults.standard.integer(forKey: "goal")
     }
     private var lastAdd = 0
 
     @IBOutlet weak var progressLabel: UILabel!
-    
     @IBOutlet weak var drink100MlOutlet: UIButton!
     @IBOutlet weak var drink200MlOutlet: UIButton!
     @IBOutlet weak var drink300MlOutlet: UIButton!
@@ -36,20 +42,17 @@ class HomeVC: UIViewController {
         updateProgressLabel()
     }
     
-    // MARK: Setup navigation
     private func setupNavigation() {
         navigationItem.title = "H2O"
         navigationController?.title = "H2O"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    // MARK: Setup progress label
     private func setupProgressLabel() {
         updateProgressLabel()
         self.progressLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
     }
     
-    // MARK: Setup buttons
     private func setupButtons() {
         self.drink100MlOutlet.applyStyle(title: "Drink 100ml", normalColor: .white, highlightedColor: .gray)
         self.drink200MlOutlet.applyStyle(title: "Drink 200ml", normalColor: .white, highlightedColor: .gray)
@@ -59,28 +62,27 @@ class HomeVC: UIViewController {
         self.resetAllDayOutlet.applyStyle(title: "Reset all day", normalColor: .systemPink, highlightedColor: .gray)
     }
     
-    // MARK: Update progress label
+    private func addWatter(_ amount: Int) {
+        lastAdd = amount
+        currentVolume += lastAdd
+        updateProgressLabel()
+    }
+    
     private func updateProgressLabel() {
         let percent = (Double(currentVolume) / Double(goal)) * 100
         progressLabel.text = "Progress: \(currentVolume) / \(goal)ml (\(Int(percent))%)"
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {
-        lastAdd = 100
-        currentVolume += lastAdd
-        updateProgressLabel()
+        addWatter(100)
     }
     
     @IBAction func drink200MlButton(_ sender: UIButton) {
-        lastAdd = 200
-        currentVolume += lastAdd
-        updateProgressLabel()
+        addWatter(200)
     }
     
     @IBAction func drink300MlButton(_ sender: UIButton) {
-        lastAdd = 300
-        currentVolume += lastAdd
-        updateProgressLabel()
+        addWatter(300)
     }
     
     @IBAction func customeVolumeButton(_ sender: UIButton) {
