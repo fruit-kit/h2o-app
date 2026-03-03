@@ -106,7 +106,7 @@ class HomeVC: UIViewController {
         let cancelButton = UIAlertAction(title: "cancel", style: .cancel)
         alertController.addTextField { textField in
             textField.keyboardType = .numberPad
-            textField.placeholder = "milliliters"
+            textField.placeholder = "ml"
         }
         alertController.addAction(cancelButton)
         alertController.addAction(actionButton)
