@@ -10,7 +10,9 @@ import UIKit
 class HomeVC: UIViewController {
     
     private var currentVolume = 0
-    private var goalVolume = 2000
+    private var goal: Int {
+        return UserDefaults.standard.integer(forKey: "goal")
+    }
     private var lastAdd = 0
 
     @IBOutlet weak var progressLabel: UILabel!
@@ -27,6 +29,11 @@ class HomeVC: UIViewController {
         setupNavigation()
         setupProgressLabel()
         setupButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateProgressLabel()
     }
     
     // MARK: Setup navigation
@@ -54,8 +61,8 @@ class HomeVC: UIViewController {
     
     // MARK: Update progress label
     private func updateProgressLabel() {
-        let percent = (Double(currentVolume) / Double(goalVolume)) * 100
-        progressLabel.text = "Progress: \(currentVolume) / \(goalVolume)ml (\(Int(percent))%)"
+        let percent = (Double(currentVolume) / Double(goal)) * 100
+        progressLabel.text = "Progress: \(currentVolume) / \(goal)ml (\(Int(percent))%)"
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {

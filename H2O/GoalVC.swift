@@ -9,7 +9,16 @@ import UIKit
 
 class GoalVC: UIViewController {
     
-    var currentGoal = 2_000
+    private var defaultGoal = 2_000
+    
+    var goal: Int {
+        let goal = UserDefaults.standard.integer(forKey: "goal")
+        guard goal > 0 else {
+            UserDefaults.standard.set(defaultGoal, forKey: "goal")
+            return UserDefaults.standard.integer(forKey: "goal")
+        }
+        return goal
+    }
     
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var setGoalOutlet: UIButton!
@@ -22,7 +31,7 @@ class GoalVC: UIViewController {
     }
     
     private func fillGoalVC() {
-        self.goalLabel.text = "Current goal \(self.currentGoal)ml"
+        self.goalLabel.text = "Current goal is \(self.goal)ml"
         self.goalLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
         
         navigationItem.title = "Goal"
@@ -39,8 +48,11 @@ class GoalVC: UIViewController {
             let customeGoal = alertController.textFields?.first?.text ?? ""
             if let customeGoal = Int(customeGoal),
                customeGoal > 0 {
-                self.currentGoal = customeGoal
-                self.goalLabel.text = "Current goal \(self.currentGoal)ml"
+                UserDefaults.standard.set(customeGoal, forKey: "goal")
+                self.goalLabel.text = "Current goal is \(self.goal)ml"
+            } else {
+                UserDefaults.standard.set(self.defaultGoal, forKey: "goal")
+                self.goalLabel.text = "Current goal is \(self.goal)ml"
             }
         }
         let cancelButton = UIAlertAction(title: "cancel", style: .cancel)
@@ -54,8 +66,8 @@ class GoalVC: UIViewController {
     }
     
     @IBAction func resetToDefaultButton(_ sender: UIButton) {
-        self.currentGoal = 2_000
-        self.goalLabel.text = "Current goal \(self.currentGoal)ml"
+        UserDefaults.standard.set(defaultGoal, forKey: "goal")
+        self.goalLabel.text = "Current goal is \(UserDefaults.standard.integer(forKey: "goal"))ml"
     }
     
 }
