@@ -47,6 +47,7 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateProgressLabel()
+        checkDate()
     }
     
     private func setupNavigation() {
@@ -56,7 +57,6 @@ class HomeVC: UIViewController {
     }
     
     private func setupProgressLabel() {
-        updateProgressLabel()
         self.progressLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
     }
     
@@ -76,8 +76,20 @@ class HomeVC: UIViewController {
     }
     
     private func updateProgressLabel() {
+        checkDate()
         let percent = (Double(currentVolume) / Double(goal)) * 100
         progressLabel.text = "Progress: \(currentVolume) / \(goal)ml (\(Int(percent))%)"
+    }
+    
+    private func checkDate() {
+        let lastOpenDate = UserDefaults.standard.object(forKey: "lastOpenDate") as? Date ?? Date()
+        guard Calendar.current.isDateInToday(lastOpenDate) else {
+            currentVolume = 0
+            UserDefaults.standard.set(Date(), forKey: "lastOpenDate")
+            updateProgressLabel()
+            return
+        }
+        UserDefaults.standard.set(Date(), forKey: "lastOpenDate")
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {
