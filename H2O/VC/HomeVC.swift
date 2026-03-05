@@ -82,14 +82,14 @@ class HomeVC: UIViewController {
     }
     
     private func checkDate() {
-        let lastOpenDate = UserDefaults.standard.object(forKey: "lastOpenDate") as? Date ?? Date()
+        let lastOpenDate = UserDefaults.standard.object(forKey: UserDefaultsKeys.lastOpenDate.rawValue) as? Date ?? Date()
         guard Calendar.current.isDateInToday(lastOpenDate) else {
             currentVolume = 0
-            UserDefaults.standard.set(Date(), forKey: "lastOpenDate")
+            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
             updateProgressLabel()
             return
         }
-        UserDefaults.standard.set(Date(), forKey: "lastOpenDate")
+        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {

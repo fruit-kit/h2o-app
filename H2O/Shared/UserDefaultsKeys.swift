@@ -9,4 +9,5 @@ enum UserDefaultsKeys: String {
     case currentVolume
     case goal
     case lastAdd
+    case lastOpenDate
 }
