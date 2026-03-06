@@ -20,6 +20,7 @@
                     <connections>
                         <segue destination="JFH-1v-Kjr" kind="relationship" relationship="viewControllers" id="dvU-yG-Ia8"/>
                         <segue destination="P2M-Nr-7ho" kind="relationship" relationship="viewControllers" id="KlT-aX-ZiM"/>
+                        <segue destination="hkT-jI-nza" kind="relationship" relationship="viewControllers" id="ICA-vB-IaA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NYS-Rt-rj2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -41,7 +42,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9P-ki-C9a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-874" y="-266"/>
+            <point key="canvasLocation" x="-874" y="-659"/>
         </scene>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
@@ -237,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="-266"/>
+            <point key="canvasLocation" x="24" y="-659"/>
         </scene>
         <!--Goal-->
         <scene sceneID="A0w-Ac-Nw9">
@@ -254,7 +255,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bba-CG-Kep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-874" y="417"/>
+            <point key="canvasLocation" x="-874" y="25"/>
         </scene>
         <!--GoalVC-->
         <scene sceneID="RHr-A6-C13">
@@ -354,10 +355,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiX-fi-P3p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="417"/>
+            <point key="canvasLocation" x="24" y="25"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="HH6-QX-dmG">
+            <objects>
+                <navigationController id="hkT-jI-nza" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="History" image="calendar" catalog="system" selectedImage="calendar" id="FFg-af-oSy"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tbm-Jm-9it">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yVA-l3-vyw" kind="relationship" relationship="rootViewController" id="90R-Cy-nbA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RL2-yv-oGZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-886" y="760"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="Vz2-sx-WxZ">
+            <objects>
+                <viewController id="yVA-l3-vyw" customClass="HistoryVC" customModule="H2O" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hMK-10-LDD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qnY-Ok-ymV">
+                                <rect key="frame" x="0.0" y="172" width="393" height="563"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sia-Rd-hZq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qnY-Ok-ymV" firstAttribute="top" secondItem="sia-Rd-hZq" secondAttribute="top" id="3fY-Ej-W4z"/>
+                            <constraint firstItem="sia-Rd-hZq" firstAttribute="bottom" secondItem="qnY-Ok-ymV" secondAttribute="bottom" id="8Uj-fe-oqQ"/>
+                            <constraint firstItem="sia-Rd-hZq" firstAttribute="trailing" secondItem="qnY-Ok-ymV" secondAttribute="trailing" id="LFu-Ec-x75"/>
+                            <constraint firstItem="qnY-Ok-ymV" firstAttribute="leading" secondItem="sia-Rd-hZq" secondAttribute="leading" id="otZ-8r-lEp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="Cnb-LI-dK2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="egQ-kN-gpR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24" y="760"/>
         </scene>
     </scenes>
     <resources>
+        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="drop" catalog="system" width="96" height="128"/>
         <image name="drop.fill" catalog="system" width="96" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
