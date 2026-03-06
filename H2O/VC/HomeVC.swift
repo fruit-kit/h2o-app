@@ -8,27 +8,6 @@
 import UIKit
 
 class HomeVC: UIViewController {
-    
-    private var currentVolume: Int {
-        get {
-            UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentVolume.rawValue)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.currentVolume.rawValue)
-        }
-    }
-    private var goal: Int {
-        return UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
-    }
-    private var lastAdd: Int {
-        get {
-            UserDefaults.standard.integer(forKey: UserDefaultsKeys.lastAdd.rawValue)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.lastAdd.rawValue)
-        }
-    }
-
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var drink100MlOutlet: UIButton!
     @IBOutlet weak var drink200MlOutlet: UIButton!
@@ -46,8 +25,8 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        WaterManager.shared.checkDate()
         updateProgressLabel()
-        checkDate()
     }
     
     private func setupNavigation() {
@@ -69,39 +48,24 @@ class HomeVC: UIViewController {
         self.resetAllDayOutlet.applyStyle(title: "Reset all day", normalColor: .systemPink, highlightedColor: .gray)
     }
     
-    private func addWater(_ amount: Int) {
-        lastAdd = amount
-        currentVolume += lastAdd
-        updateProgressLabel()
-    }
-    
     private func updateProgressLabel() {
-        checkDate()
-        let percent = (Double(currentVolume) / Double(goal)) * 100
-        progressLabel.text = "Progress: \(currentVolume) / \(goal)ml (\(Int(percent))%)"
-    }
-    
-    private func checkDate() {
-        let lastOpenDate = UserDefaults.standard.object(forKey: UserDefaultsKeys.lastOpenDate.rawValue) as? Date ?? Date()
-        guard Calendar.current.isDateInToday(lastOpenDate) else {
-            currentVolume = 0
-            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
-            updateProgressLabel()
-            return
-        }
-        UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
+        let percent = (Double(WaterManager.shared.currentVolume) / Double(WaterManager.shared.currentGoal)) * 100
+        progressLabel.text = "Progress: \(WaterManager.shared.currentVolume) / \(WaterManager.shared.currentGoal)ml (\(Int(percent))%)"
     }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {
-        addWater(100)
+        WaterManager.shared.addWater(100)
+        updateProgressLabel()
     }
     
     @IBAction func drink200MlButton(_ sender: UIButton) {
-        addWater(200)
+        WaterManager.shared.addWater(200)
+        updateProgressLabel()
     }
     
     @IBAction func drink300MlButton(_ sender: UIButton) {
-        addWater(300)
+        WaterManager.shared.addWater(300)
+        updateProgressLabel()
     }
     
     @IBAction func customeVolumeButton(_ sender: UIButton) {
@@ -110,8 +74,7 @@ class HomeVC: UIViewController {
             let customeVolume = alertController.textFields?.first?.text ?? ""
             if let customeVolume = Int(customeVolume),
                customeVolume > 0 {
-                self.lastAdd = customeVolume
-                self.currentVolume += self.lastAdd
+                WaterManager.shared.addWater(customeVolume)
                 self.updateProgressLabel()
             }
         }
@@ -126,18 +89,12 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
-        guard currentVolume >= lastAdd else {
-            currentVolume = 0
-            updateProgressLabel()
-            return
-        }
-        currentVolume -= lastAdd
+        WaterManager.shared.undoLast()
         updateProgressLabel()
-        lastAdd = 0
     }
     
     @IBAction func resetAllDayButton(_ sender: UIButton) {
-        currentVolume = 0
+        WaterManager.shared.resetDay()
         updateProgressLabel()
     }
     

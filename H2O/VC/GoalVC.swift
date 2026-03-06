@@ -8,30 +8,17 @@
 import UIKit
 
 class GoalVC: UIViewController {
-    
-    private var defaultGoal = 2_000
-    
-    var goal: Int {
-        let goal = UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
-        guard goal > 0 else {
-            UserDefaults.standard.set(defaultGoal, forKey: "goal")
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
-        }
-        return goal
-    }
-    
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var setGoalOutlet: UIButton!
     @IBOutlet weak var resetToDefaultOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         fillGoalVC()
     }
     
     private func fillGoalVC() {
-        self.goalLabel.text = "Current goal is \(self.goal)ml"
+        self.goalLabel.text = "Current goal is \(WaterManager.shared.currentGoal)ml"
         self.goalLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
         
         navigationItem.title = "Goal"
@@ -48,11 +35,11 @@ class GoalVC: UIViewController {
             let customeGoal = alertController.textFields?.first?.text ?? ""
             if let customeGoal = Int(customeGoal),
                customeGoal > 0 {
-                UserDefaults.standard.set(customeGoal, forKey: "goal")
-                self.goalLabel.text = "Current goal is \(self.goal)ml"
+                UserDefaults.standard.set(customeGoal, forKey: UserDefaultsKeys.goal.rawValue)
+                self.goalLabel.text = "Current goal is \(WaterManager.shared.currentGoal)ml"
             } else {
-                UserDefaults.standard.set(self.defaultGoal, forKey: "goal")
-                self.goalLabel.text = "Current goal is \(self.goal)ml"
+                UserDefaults.standard.set(WaterManager.shared.defaultGoal, forKey: UserDefaultsKeys.goal.rawValue)
+                self.goalLabel.text = "Current goal is \(WaterManager.shared.currentGoal)ml"
             }
         }
         let cancelButton = UIAlertAction(title: "cancel", style: .cancel)
@@ -66,8 +53,8 @@ class GoalVC: UIViewController {
     }
     
     @IBAction func resetToDefaultButton(_ sender: UIButton) {
-        UserDefaults.standard.set(defaultGoal, forKey: "goal")
-        self.goalLabel.text = "Current goal is \(UserDefaults.standard.integer(forKey: "goal"))ml"
+        UserDefaults.standard.set(WaterManager.shared.defaultGoal, forKey: UserDefaultsKeys.goal.rawValue)
+        self.goalLabel.text = "Current goal is \(UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue))ml"
     }
     
 }
