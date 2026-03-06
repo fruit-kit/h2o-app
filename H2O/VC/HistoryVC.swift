@@ -9,9 +9,21 @@ import UIKit
 
 class HistoryVC: UIViewController {
 
+    @IBOutlet weak var historyTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+        
+        let historyTableViewCell = UINib(nibName: "HistoryTableViewCell", bundle: Bundle.main)
+        historyTableView.register(historyTableViewCell, forCellReuseIdentifier: "HistoryTableViewCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        historyTableView.reloadData()
     }
  
     private func setupNavigation() {
@@ -20,4 +32,24 @@ class HistoryVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
+}
+
+extension HistoryVC: UITableViewDelegate { }
+
+extension HistoryVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        WaterManager.shared.drinkEntrys.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as? HistoryTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.dateLabel.text = "Date: \(WaterManager.shared.drinkEntrys[indexPath.row].date)"
+        cell.timeLabel.text = "Time: \(WaterManager.shared.drinkEntrys[indexPath.row].date)"
+        cell.volumeLable.text = "Volume: \(WaterManager.shared.drinkEntrys[indexPath.row].volume)"
+        cell.typeLabel.text = "Type: \(WaterManager.shared.drinkEntrys[indexPath.row].type)"
+        return cell
+    }
+    
 }
