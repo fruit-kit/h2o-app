@@ -383,27 +383,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qnY-Ok-ymV">
-                                <rect key="frame" x="0.0" y="172" width="393" height="563"/>
+                                <rect key="frame" x="0.0" y="172" width="393" height="481"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSw-r6-7U7">
+                                <rect key="frame" x="0.0" y="661" width="393" height="74"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNb-Un-WPa">
+                                        <rect key="frame" x="16" y="8" width="361" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XYD-yg-hPo"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="clearHistoryAction:" destination="yVA-l3-vyw" eventType="touchUpInside" id="IKN-r5-Btm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="qNb-Un-WPa" firstAttribute="leading" secondItem="aSw-r6-7U7" secondAttribute="leading" constant="16" id="8Z0-Xw-oys"/>
+                                    <constraint firstAttribute="trailing" secondItem="qNb-Un-WPa" secondAttribute="trailing" constant="16" id="BXK-Qg-eBA"/>
+                                    <constraint firstAttribute="bottom" secondItem="qNb-Un-WPa" secondAttribute="bottom" constant="16" id="GM4-UF-UH4"/>
+                                    <constraint firstItem="qNb-Un-WPa" firstAttribute="top" secondItem="aSw-r6-7U7" secondAttribute="top" constant="8" id="N1O-DS-WqB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sia-Rd-hZq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qnY-Ok-ymV" firstAttribute="top" secondItem="sia-Rd-hZq" secondAttribute="top" id="3fY-Ej-W4z"/>
-                            <constraint firstItem="sia-Rd-hZq" firstAttribute="bottom" secondItem="qnY-Ok-ymV" secondAttribute="bottom" id="8Uj-fe-oqQ"/>
+                            <constraint firstItem="aSw-r6-7U7" firstAttribute="leading" secondItem="sia-Rd-hZq" secondAttribute="leading" id="4Xd-wq-YTk"/>
+                            <constraint firstItem="sia-Rd-hZq" firstAttribute="bottom" secondItem="aSw-r6-7U7" secondAttribute="bottom" id="FfC-aa-JI2"/>
                             <constraint firstItem="sia-Rd-hZq" firstAttribute="trailing" secondItem="qnY-Ok-ymV" secondAttribute="trailing" id="LFu-Ec-x75"/>
+                            <constraint firstItem="aSw-r6-7U7" firstAttribute="top" secondItem="qnY-Ok-ymV" secondAttribute="bottom" constant="8" id="oFz-Qh-AZY"/>
                             <constraint firstItem="qnY-Ok-ymV" firstAttribute="leading" secondItem="sia-Rd-hZq" secondAttribute="leading" id="otZ-8r-lEp"/>
+                            <constraint firstItem="sia-Rd-hZq" firstAttribute="trailing" secondItem="aSw-r6-7U7" secondAttribute="trailing" id="tBk-3t-kNh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Cnb-LI-dK2"/>
                     <connections>
+                        <outlet property="clearHistoryOutlet" destination="qNb-Un-WPa" id="cf4-Mw-Qec"/>
                         <outlet property="historyTableView" destination="qnY-Ok-ymV" id="uIH-3N-rPU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egQ-kN-gpR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="760"/>
+            <point key="canvasLocation" x="23.664122137404579" y="759.85915492957747"/>
         </scene>
     </scenes>
     <resources>

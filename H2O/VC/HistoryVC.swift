@@ -10,6 +10,7 @@ import UIKit
 class HistoryVC: UIViewController {
 
     @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var clearHistoryOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,8 @@ class HistoryVC: UIViewController {
         
         let historyTableViewCell = UINib(nibName: "HistoryTableViewCell", bundle: Bundle.main)
         historyTableView.register(historyTableViewCell, forCellReuseIdentifier: "HistoryTableViewCell")
+        
+        clearHistoryOutlet.applyStyle(title: "Clear all history", normalColor: .systemPink, highlightedColor: .gray)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,6 +30,11 @@ class HistoryVC: UIViewController {
         historyTableView.reloadData()
     }
  
+    @IBAction func clearHistoryAction(_ sender: UIButton) {
+        DrinkManager.shared.clearAllHistory()
+        self.historyTableView.reloadData()
+    }
+    
     private func setupNavigation() {
         navigationItem.title = "History"
         navigationController?.title = "History"

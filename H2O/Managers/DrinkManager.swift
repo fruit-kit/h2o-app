@@ -68,6 +68,13 @@ class DrinkManager {
         self.saveHistory()
     }
     
+    func clearAllHistory() {
+        self.currentVolume = 0
+        self.lastAdd = 0
+        self.drinkEntrys.removeAll()
+        self.saveHistory()
+    }
+    
     func undoLast() {
         guard self.currentVolume >= self.lastAdd else {
             self.currentVolume = 0
