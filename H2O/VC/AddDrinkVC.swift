@@ -40,10 +40,14 @@ class AddDrinkVC: UIViewController {
     }
     
     @IBAction func addDrinkEntryAction(_ sender: UIButton) {
-        if let ml = Int(self.textFieldOutlet.text ?? "0") {
-            DrinkManager.shared.addDrink(ml)
-            delegate?.didAddDrink()
+        guard let text = self.textFieldOutlet.text,
+              let ml = Int(text),
+        ml > 0 else {
+            self.dismiss(animated: true)
+            return
         }
+        DrinkManager.shared.addDrink(ml)
+        delegate?.didAddDrink()
         self.dismiss(animated: true)
     }
     
