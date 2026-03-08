@@ -7,7 +7,8 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, AddDrinkDelegate {
+    
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var drink100MlOutlet: UIButton!
     @IBOutlet weak var drink200MlOutlet: UIButton!
@@ -26,6 +27,10 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DrinkManager.shared.checkDate()
+        updateProgressLabel()
+    }
+    
+    func didAddDrink() {
         updateProgressLabel()
     }
     
@@ -52,40 +57,33 @@ class HomeVC: UIViewController {
         let percent = (Double(DrinkManager.shared.currentVolume) / Double(DrinkManager.shared.currentGoal)) * 100
         progressLabel.text = "Progress: \(DrinkManager.shared.currentVolume) / \(DrinkManager.shared.currentGoal)ml (\(Int(percent))%)"
     }
+    
+    private func presentAddDrink(volume: Int?) {
+        let addDrinkVC = AddDrinkVC(nibName: "AddDrinkVC", bundle: Bundle.main)
+        addDrinkVC.delegate = self
+        
+        if let sheet = addDrinkVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            }
+        addDrinkVC.presentVolume = volume
+        present(addDrinkVC, animated: true)
+    }
  
     @IBAction func drink100MlButton(_ sender: UIButton) {
-        DrinkManager.shared.addDrink(100)
-        updateProgressLabel()
+        presentAddDrink(volume: 100)
     }
     
     @IBAction func drink200MlButton(_ sender: UIButton) {
-        DrinkManager.shared.addDrink(200)
-        updateProgressLabel()
+        presentAddDrink(volume: 200)
     }
     
     @IBAction func drink300MlButton(_ sender: UIButton) {
-        DrinkManager.shared.addDrink(300)
-        updateProgressLabel()
+        presentAddDrink(volume: 300)
     }
     
     @IBAction func customeVolumeButton(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Enter the volume", message: nil, preferredStyle: .alert)
-        let actionButton = UIAlertAction(title: "OK", style: .default) { _ in
-            let customeVolume = alertController.textFields?.first?.text ?? ""
-            if let customeVolume = Int(customeVolume),
-               customeVolume > 0 {
-                DrinkManager.shared.addDrink(customeVolume)
-                self.updateProgressLabel()
-            }
-        }
-        let cancelButton = UIAlertAction(title: "cancel", style: .cancel)
-        alertController.addTextField { textField in
-            textField.keyboardType = .numberPad
-            textField.placeholder = "ml"
-        }
-        alertController.addAction(cancelButton)
-        alertController.addAction(actionButton)
-        self.present(alertController, animated: true)
+        presentAddDrink(volume: nil)
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
