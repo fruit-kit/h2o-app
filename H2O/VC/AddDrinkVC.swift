@@ -10,14 +10,19 @@ import UIKit
 class AddDrinkVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textFieldOutlet: UITextField!
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var addDrinkEntryOutlet: UIButton!
     @IBOutlet weak var cancelDrinkEntryOutlet: UIButton!
     
     weak var delegate: AddDrinkDelegate?
     var presentVolume: Int?
+    var selectedDrink: DrinkType = .water
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+        
         setupTitle()
         setupTextField()
         self.addDrinkEntryOutlet.applyStyle(title: "Add", normalColor: .white, highlightedColor: .gray)
@@ -25,7 +30,7 @@ class AddDrinkVC: UIViewController {
     }
     
     private func setupTitle() {
-        self.titleLabel.text = "Add drink entry"
+        self.titleLabel.text = "Add drink"
         self.titleLabel.font = .systemFont(ofSize: CGFloat(34), weight: .bold)
     }
     
@@ -42,23 +47,49 @@ class AddDrinkVC: UIViewController {
     }
     
     @IBAction func addDrinkEntryAction(_ sender: UIButton) {
-        guard let text = self.textFieldOutlet.text,
+        guard let text = textFieldOutlet.text,
               let ml = Int(text),
-        ml > 0 else {
-            self.dismiss(animated: true)
+              ml > 0 else {
+            dismiss(animated: true)
             return
         }
-        DrinkManager.shared.addDrink(ml)
+        DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
         delegate?.didAddDrink()
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
     @IBAction func cancelDrinkEntryAction(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
 }
 
 protocol AddDrinkDelegate: AnyObject {
     func didAddDrink()
+}
+
+extension AddDrinkVC: UIPickerViewDataSource {
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        DrinkType.allCases.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+}
+
+extension AddDrinkVC: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let drinks = DrinkType.allCases
+        let text = drinks[row].rawValue
+        return text
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedDrink = DrinkType.allCases[row]
+    }
+    
 }

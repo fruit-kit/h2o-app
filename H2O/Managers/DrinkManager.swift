@@ -38,11 +38,11 @@ class DrinkManager {
         }
     }
     
-    func addDrink(_ amount: Int) {
+    func addDrink(amount: Int, drink: DrinkType) {
         lastAdd = amount
         currentVolume += lastAdd
     
-        self.drinkEntrys.insert(DrinkEntry(date: Date(), volume: lastAdd, type: .water), at: 0)
+        self.drinkEntrys.insert(DrinkEntry(date: Date(), volume: lastAdd, type: drink), at: 0)
         
         saveHistory()
     }

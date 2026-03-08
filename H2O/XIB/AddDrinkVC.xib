@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="addDrinkEntryOutlet" destination="Oen-Vv-4kL" id="1tK-l5-Z5Y"/>
                 <outlet property="cancelDrinkEntryOutlet" destination="wgL-yV-Hww" id="oto-ao-JX3"/>
+                <outlet property="pickerView" destination="Kap-n4-VgV" id="B8L-bi-esL"/>
                 <outlet property="textFieldOutlet" destination="LyD-jA-pIb" id="Hyc-eG-Nik"/>
                 <outlet property="titleLabel" destination="J7u-Et-5Pn" id="bvK-uP-UZt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P5o-au-Clq">
-                    <rect key="frame" x="0.0" y="118" width="393" height="326"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="442"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlf-kW-0lw">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
@@ -64,8 +65,27 @@
                                 <constraint firstAttribute="bottom" secondItem="LyD-jA-pIb" secondAttribute="bottom" constant="8" id="lMk-MS-DOQ"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8M-Ty-a3E">
+                            <rect key="frame" x="0.0" y="194" width="393" height="116"/>
+                            <subviews>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kap-n4-VgV">
+                                    <rect key="frame" x="16" y="8" width="361" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="cOh-dr-9Pb"/>
+                                    </constraints>
+                                </pickerView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Kap-n4-VgV" secondAttribute="bottom" constant="8" id="1CB-Ig-Zev"/>
+                                <constraint firstItem="Kap-n4-VgV" firstAttribute="top" secondItem="b8M-Ty-a3E" secondAttribute="top" constant="8" id="91h-jh-Mt2"/>
+                                <constraint firstAttribute="trailing" secondItem="Kap-n4-VgV" secondAttribute="trailing" constant="16" id="b9s-Pa-Vpv"/>
+                                <constraint firstItem="Kap-n4-VgV" firstAttribute="leading" secondItem="b8M-Ty-a3E" secondAttribute="leading" constant="16" id="oyC-KD-wma"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7B-xC-kAv">
-                            <rect key="frame" x="0.0" y="194" width="393" height="66"/>
+                            <rect key="frame" x="0.0" y="310" width="393" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oen-Vv-4kL">
                                     <rect key="frame" x="16" y="8" width="361" height="50"/>
@@ -88,7 +108,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3w-Sv-bk5">
-                            <rect key="frame" x="0.0" y="260" width="393" height="66"/>
+                            <rect key="frame" x="0.0" y="376" width="393" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgL-yV-Hww">
                                     <rect key="frame" x="16" y="8" width="361" height="50"/>
