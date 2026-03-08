@@ -8,7 +8,6 @@
 import UIKit
 
 class AddDrinkVC: UIViewController {
-
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textFieldOutlet: UITextField!
     @IBOutlet weak var addDrinkEntryOutlet: UIButton!
@@ -18,9 +17,17 @@ class AddDrinkVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTitle()
+        setupTextField()
+        self.addDrinkEntryOutlet.applyStyle(title: "Add", normalColor: .white, highlightedColor: .gray)
+    }
+    
+    private func setupTitle() {
         self.titleLabel.text = "Add drink entry"
         self.titleLabel.font = .systemFont(ofSize: CGFloat(34), weight: .bold)
-        
+    }
+    
+    private func setupTextField() {
         textFieldOutlet.placeholder = "ml"
         if let presentVolume {
             textFieldOutlet.text = "\(presentVolume)"
@@ -30,18 +37,14 @@ class AddDrinkVC: UIViewController {
         textFieldOutlet.clipsToBounds = true
         textFieldOutlet.layer.borderWidth = 1
         textFieldOutlet.layer.borderColor = UIColor.gray.cgColor
-        
-        self.addDrinkEntryOutlet.applyStyle(title: "Add", normalColor: .white, highlightedColor: .gray)
     }
-
+    
     @IBAction func addDrinkEntryAction(_ sender: UIButton) {
         if let ml = Int(self.textFieldOutlet.text ?? "0") {
             DrinkManager.shared.addDrink(ml)
             delegate?.didAddDrink()
-            self.dismiss(animated: true)
-        } else {
-            self.dismiss(animated: true)
         }
+        self.dismiss(animated: true)
     }
     
 }
