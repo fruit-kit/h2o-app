@@ -31,8 +31,12 @@ class HistoryVC: UIViewController {
     }
  
     @IBAction func clearHistoryAction(_ sender: UIButton) {
-        DrinkManager.shared.clearAllHistory()
-        self.historyTableView.reloadData()
+        let clearAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
+            DrinkManager.shared.clearAllHistory()
+            self.historyTableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertConfirmation(title: "Clear all history?", message: "This will remove all entries and cannot be undone.", actions: [clearAction, cancelAction])
     }
     
     private func setupNavigation() {
@@ -46,10 +50,13 @@ class HistoryVC: UIViewController {
 extension HistoryVC: UITableViewDelegate { }
 
 extension HistoryVC: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         DrinkManager.shared.drinkEntrys.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as? HistoryTableViewCell else {
             return UITableViewCell()
