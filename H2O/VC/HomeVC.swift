@@ -65,11 +65,11 @@ class HomeVC: UIViewController, AddDrinkDelegate {
         if let sheet = addDrinkVC.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
-            }
+        }
         addDrinkVC.presentVolume = volume
         present(addDrinkVC, animated: true)
     }
- 
+    
     @IBAction func drink100MlButton(_ sender: UIButton) {
         presentAddDrink(volume: 100)
     }
@@ -87,8 +87,14 @@ class HomeVC: UIViewController, AddDrinkDelegate {
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
-        DrinkManager.shared.undoLast()
-        updateProgressLabel()
+        let undoAction = UIAlertAction(title: "Undo", style: .default) { _ in
+            DrinkManager.shared.undoLast()
+            self.updateProgressLabel()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertConfirmation(title: "Undo last drink?",
+                          message: "This will remove the last entry.",
+                          actions: [undoAction, cancelAction])
     }
     
     @IBAction func resetAllDayButton(_ sender: UIButton) {
