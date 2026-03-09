@@ -87,19 +87,23 @@ class HomeVC: UIViewController, AddDrinkDelegate {
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
-        let undoAction = UIAlertAction(title: "Undo", style: .default) { _ in
+        let undoAction = UIAlertAction(title: "Undo", style: .destructive) { _ in
             DrinkManager.shared.undoLast()
             self.updateProgressLabel()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertConfirmation(title: "Undo last drink?",
-                          message: "This will remove the last entry.",
+                          message: "This action will remove the last entry and cannot be undone.",
                           actions: [undoAction, cancelAction])
     }
     
     @IBAction func resetAllDayButton(_ sender: UIButton) {
-        DrinkManager.shared.resetDay()
-        updateProgressLabel()
+        let resetAction = UIAlertAction(title: "Reset", style: .destructive) { _ in
+            DrinkManager.shared.resetDay()
+            self.updateProgressLabel()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertConfirmation(title: "Reset all day?", message: "This action will remove all entries for today and cannot be undone.", actions: [resetAction, cancelAction])
     }
     
 }
