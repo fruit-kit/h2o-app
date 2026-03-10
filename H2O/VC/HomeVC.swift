@@ -9,6 +9,8 @@ import UIKit
 
 class HomeVC: UIViewController, AddDrinkDelegate {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var drink100MlOutlet: UIButton!
     @IBOutlet weak var drink200MlOutlet: UIButton!
@@ -16,6 +18,8 @@ class HomeVC: UIViewController, AddDrinkDelegate {
     @IBOutlet weak var customeVolumeOutlet: UIButton!
     @IBOutlet weak var undoLastOutlet: UIButton!
     @IBOutlet weak var resetAllDayOutlet: UIButton!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,8 @@ class HomeVC: UIViewController, AddDrinkDelegate {
         DrinkManager.shared.checkDate()
         updateProgressLabel()
     }
+    
+    // MARK: - Methods
     
     func didAddDrink() {
         updateProgressLabel()
@@ -69,6 +75,8 @@ class HomeVC: UIViewController, AddDrinkDelegate {
         addDrinkVC.presentVolume = volume
         present(addDrinkVC, animated: true)
     }
+    
+    // MARK: - Actions
     
     @IBAction func drink100MlButton(_ sender: UIButton) {
         presentAddDrink(volume: 100)
