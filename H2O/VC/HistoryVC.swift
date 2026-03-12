@@ -9,8 +9,12 @@ import UIKit
 
 class HistoryVC: UIViewController {
 
+    // MARK: - Outlets
+    
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var clearHistoryOutlet: UIButton!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,16 @@ class HistoryVC: UIViewController {
         DrinkManager.shared.loadHistory()
         historyTableView.reloadData()
     }
+    
+    // MARK: - Methods
+    
+    private func setupNavigation() {
+        navigationItem.title = "History"
+        navigationController?.title = "History"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    // MARK: - Actions
  
     @IBAction func clearHistoryAction(_ sender: UIButton) {
         let clearAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
@@ -38,14 +52,10 @@ class HistoryVC: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertConfirmation(title: "Clear all history?", message: "This will remove all entries and cannot be undone.", actions: [clearAction, cancelAction])
     }
-    
-    private func setupNavigation() {
-        navigationItem.title = "History"
-        navigationController?.title = "History"
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
 
 }
+
+// MARK: - Extensions
 
 extension HistoryVC: UITableViewDelegate {
     
