@@ -66,6 +66,7 @@ extension HistoryVC: UITableViewDelegate {
             addDrinkVC.presentVolume = DrinkManager.shared.drinkEntrys[index].volume
             addDrinkVC.selectedDrink = DrinkManager.shared.drinkEntrys[index].type
             addDrinkVC.mode = .edit(index: index)
+            addDrinkVC.delegateHistoryVC = self
             self.present(addDrinkVC, animated: true)
             completion(true)
         }
@@ -107,6 +108,14 @@ extension HistoryVC: UITableViewDataSource {
         cell.volumeLable.text = "Volume: \(DrinkManager.shared.drinkEntrys[indexPath.row].volume)ml"
         cell.typeLabel.text = "Type: \(DrinkManager.shared.drinkEntrys[indexPath.row].type)"
         return cell
+    }
+    
+}
+
+extension HistoryVC: EditDrinkDelegate {
+    
+    func didEditDrink() {
+        historyTableView.reloadData()
     }
     
 }

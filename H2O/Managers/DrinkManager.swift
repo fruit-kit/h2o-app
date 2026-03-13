@@ -98,6 +98,26 @@ class DrinkManager {
         }
     }
     
+    func updateDrinkEntry(at index: Int, volume: Int, drink: DrinkType) {
+        guard drinkEntrys.indices.contains(index) else {
+            return
+        }
+        
+        let oldEntry = drinkEntrys[index]
+        
+        let updatedEntry = DrinkEntry(date: oldEntry.date, volume: volume, type: drink)
+        
+        drinkEntrys[index] = updatedEntry
+        
+        currentVolume = drinkEntrys.filter { drinkEntry in
+            Calendar.current.isDateInToday(drinkEntry.date)
+        }.reduce(0) { sum, drinkEntry in
+            sum + drinkEntry.volume
+        }
+        
+        saveHistory()
+    }
+    
     func clearAllHistory() {
         self.currentVolume = 0
         self.lastAdd = 0

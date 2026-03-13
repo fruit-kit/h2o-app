@@ -15,6 +15,7 @@ class AddDrinkVC: UIViewController {
     @IBOutlet weak var cancelDrinkEntryOutlet: UIButton!
     
     weak var delegate: AddDrinkDelegate?
+    weak var delegateHistoryVC: EditDrinkDelegate?
     var presentVolume: Int?
     var selectedDrink: DrinkType = .water
     var mode: AddDrinkMode = .add
@@ -27,10 +28,9 @@ class AddDrinkVC: UIViewController {
         case .add:
             setup(title: "Add drink")
             self.addDrinkEntryOutlet.applyStyle(title: "Add", normalColor: .white, highlightedColor: .gray)
-        case .edit(let index):
-            print(index)
+        case .edit(_):
             setup(title: "Edit drink")
-            self.addDrinkEntryOutlet.applyStyle(title: "Edit", normalColor: .white, highlightedColor: .gray)
+            self.addDrinkEntryOutlet.applyStyle(title: "Save", normalColor: .white, highlightedColor: .gray)
         }
         self.cancelDrinkEntryOutlet.applyStyle(title: "Cancel", normalColor: .systemPink, highlightedColor: .gray)
     }
@@ -68,9 +68,16 @@ class AddDrinkVC: UIViewController {
             dismiss(animated: true)
             return
         }
-        DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
-        delegate?.didAddDrink()
-        dismiss(animated: true)
+        switch mode {
+        case .add:
+            DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
+            delegate?.didAddDrink()
+            dismiss(animated: true)
+        case .edit(let index):
+            DrinkManager.shared.updateDrinkEntry(at: index, volume: ml, drink: selectedDrink)
+            delegateHistoryVC?.didEditDrink()
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func cancelDrinkEntryAction(_ sender: UIButton) {
@@ -81,6 +88,10 @@ class AddDrinkVC: UIViewController {
 
 protocol AddDrinkDelegate: AnyObject {
     func didAddDrink()
+}
+
+protocol EditDrinkDelegate: AnyObject {
+    func didEditDrink()
 }
 
 extension AddDrinkVC: UIPickerViewDataSource {
