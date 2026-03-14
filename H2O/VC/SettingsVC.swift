@@ -26,9 +26,10 @@ class SettingsVC: UIViewController {
     }
     
     private func setupNotificationSetting() {
+        notificationOutlet.text = "Notifications"
         notificationBorder.layer.borderWidth = 1
         notificationBorder.layer.borderColor = UIColor.white.cgColor
-        notificationBorder.layer.cornerRadius = 25
+        notificationBorder.layer.cornerRadius = 20
     }
     
     @IBAction func notificationSwitchAction(_ sender: UISwitch) {
