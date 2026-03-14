@@ -447,39 +447,24 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-Np-mrj">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="66"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtt-wT-Eon">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-WT-MeB">
                                                 <rect key="frame" x="16" y="8" width="361" height="50"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eso-Vb-yVv">
-                                                        <rect key="frame" x="16" y="14.999999999999998" width="252" height="20.333333333333329"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vTN-2L-qdI">
-                                                        <rect key="frame" x="284" y="11" width="63" height="28"/>
-                                                        <connections>
-                                                            <action selector="notificationSwitchAction:" destination="XjL-KW-N0M" eventType="valueChanged" id="rfV-0z-dLj"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="eso-Vb-yVv" firstAttribute="leading" secondItem="Xtt-wT-Eon" secondAttribute="leading" constant="16" id="HXe-Ep-g6x"/>
-                                                    <constraint firstItem="vTN-2L-qdI" firstAttribute="leading" secondItem="eso-Vb-yVv" secondAttribute="trailing" constant="16" id="Kv9-nY-f0T"/>
-                                                    <constraint firstItem="eso-Vb-yVv" firstAttribute="centerY" secondItem="Xtt-wT-Eon" secondAttribute="centerY" id="O0P-kI-EB9"/>
-                                                    <constraint firstAttribute="trailing" secondItem="vTN-2L-qdI" secondAttribute="trailing" constant="16" id="T2b-M2-VVe"/>
-                                                    <constraint firstAttribute="height" constant="50" id="Uq4-gm-hjh"/>
-                                                    <constraint firstItem="vTN-2L-qdI" firstAttribute="centerY" secondItem="Xtt-wT-Eon" secondAttribute="centerY" id="caA-OD-EF2"/>
+                                                    <constraint firstAttribute="height" constant="50" id="wsm-I0-gWu"/>
                                                 </constraints>
-                                            </view>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="notificationButtonAction:" destination="XjL-KW-N0M" eventType="touchUpInside" id="SzW-Mh-Jx9"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Xtt-wT-Eon" secondAttribute="trailing" constant="16" id="1Xi-4X-exl"/>
-                                            <constraint firstAttribute="bottom" secondItem="Xtt-wT-Eon" secondAttribute="bottom" constant="8" id="Aze-Hn-eYS"/>
-                                            <constraint firstItem="Xtt-wT-Eon" firstAttribute="top" secondItem="bQl-Np-mrj" secondAttribute="top" constant="8" id="kZB-XT-odX"/>
-                                            <constraint firstItem="Xtt-wT-Eon" firstAttribute="leading" secondItem="bQl-Np-mrj" secondAttribute="leading" constant="16" id="sJt-mf-3v6"/>
+                                            <constraint firstAttribute="bottom" secondItem="iIx-WT-MeB" secondAttribute="bottom" constant="8" id="DtD-uF-eIy"/>
+                                            <constraint firstItem="iIx-WT-MeB" firstAttribute="top" secondItem="bQl-Np-mrj" secondAttribute="top" constant="8" id="EUq-rR-nlN"/>
+                                            <constraint firstItem="iIx-WT-MeB" firstAttribute="leading" secondItem="bQl-Np-mrj" secondAttribute="leading" constant="16" id="Ked-CN-dzB"/>
+                                            <constraint firstAttribute="trailing" secondItem="iIx-WT-MeB" secondAttribute="trailing" constant="16" id="iDb-Qa-B7t"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -495,9 +480,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Xe9-bc-Vsl"/>
                     <connections>
-                        <outlet property="notificationBorder" destination="Xtt-wT-Eon" id="beE-8K-EhD"/>
-                        <outlet property="notificationOutlet" destination="eso-Vb-yVv" id="IK4-mp-PwF"/>
-                        <outlet property="notificationSwitcher" destination="vTN-2L-qdI" id="QbR-ah-BlX"/>
+                        <outlet property="notificationButtonOutlet" destination="iIx-WT-MeB" id="EPp-kh-I9p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YPJ-pB-uw3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

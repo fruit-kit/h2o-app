@@ -9,14 +9,16 @@ import UIKit
 
 class SettingsVC: UIViewController {
 
-    @IBOutlet weak var notificationSwitcher: UISwitch!
-    @IBOutlet weak var notificationOutlet: UILabel!
-    @IBOutlet weak var notificationBorder: UIView!
+    @IBOutlet weak var notificationButtonOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-        setupNotificationSetting()
+        notificationButtonOutlet.applyStyle(
+            title: "Notifications",
+            normalColor: .white,
+            highlightedColor: .gray
+        )
     }
 
     private func setupNavigation() {
@@ -25,15 +27,9 @@ class SettingsVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    private func setupNotificationSetting() {
-        notificationOutlet.text = "Notifications"
-        notificationBorder.layer.borderWidth = 1.5
-        notificationBorder.layer.borderColor = UIColor.white.cgColor
-        notificationBorder.layer.cornerRadius = 20
-    }
-    
-    @IBAction func notificationSwitchAction(_ sender: UISwitch) {
-        
+    @IBAction func notificationButtonAction(_ sender: UIButton) {
+        let notificationsVC = NotificationsVC(nibName: "NotificationsVC", bundle: Bundle.main)
+        self.navigationController?.pushViewController(notificationsVC, animated: true)
     }
     
 }
