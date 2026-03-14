@@ -109,6 +109,9 @@ class DrinkManager {
         
         drinkEntrys[index] = updatedEntry
         
+        if index == 0, Calendar.current.isDateInToday(updatedEntry.date) { lastAdd = updatedEntry.volume
+        }
+        
         currentVolume = drinkEntrys.filter { drinkEntry in
             Calendar.current.isDateInToday(drinkEntry.date)
         }.reduce(0) { sum, drinkEntry in
