@@ -11,14 +11,10 @@ class NotificationManager {
     static let shared = NotificationManager()
     private init() { }
     
-    func requestPermission() {
+    func requestPermission(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { isAllow, error in
-            if isAllow {
-                print("Allowed Notifications")
-                self.sendNotification()
-            } else {
-                print("Didn't allow Nitifications")
-            }
+            UserDefaults.standard.set(isAllow, forKey: "requestPermission")
+            completion(isAllow)
         }
     }
     
@@ -29,8 +25,8 @@ class NotificationManager {
         content.sound = .default
         
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: 10,
-            repeats: false
+            timeInterval: 60,
+            repeats: true
         )
         
         let request = UNNotificationRequest(
@@ -39,6 +35,10 @@ class NotificationManager {
             trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    func removeNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["waterReminder"])
     }
     
 }
