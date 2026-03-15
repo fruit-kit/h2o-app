@@ -9,8 +9,12 @@ import UIKit
 
 class NotificationsVC: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var notificationSwitcherOutlet: UISwitch!
     @IBOutlet weak var notificationLabelOutlet: UILabel!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,8 @@ class NotificationsVC: UIViewController {
             notificationSwitcherOutlet.isOn = false
         }
     }
+    
+    // MARK: - Actions
     
     @IBAction func notificationSwitcherAction(_ sender: UISwitch) {
         if sender.isOn {
