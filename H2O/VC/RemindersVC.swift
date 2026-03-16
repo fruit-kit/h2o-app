@@ -11,6 +11,7 @@ class RemindersVC: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var frequencyLabel: UILabel!
     @IBOutlet weak var reminderLabelOutlet: UILabel!
     @IBOutlet weak var reminderSwitcherOutlet: UISwitch!
     
@@ -19,6 +20,7 @@ class RemindersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Reminders"
+        frequencyLabel.text = "Remind me every"
         reminderLabelOutlet.text = "Water reminders"
         
         if UserDefaults.standard.bool(forKey: "waterReminder"),
