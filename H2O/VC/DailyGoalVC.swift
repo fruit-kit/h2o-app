@@ -1,14 +1,14 @@
 //
-//  GoalVC.swift
+//  DailyGoalVC.swift
 //  H2O
 //
-//  Created by Robert Kotrutsa on 01.03.26.
+//  Created by Robert Kotrutsa on 16.03.26.
 //
 
 import UIKit
 
-class GoalVC: UIViewController {
-    
+class DailyGoalVC: UIViewController {
+
     // MARK: - Outlets
     
     @IBOutlet weak var goalLabel: UILabel!
@@ -28,8 +28,7 @@ class GoalVC: UIViewController {
         self.goalLabel.text = "Current goal is \(DrinkManager.shared.currentGoal)ml"
         self.goalLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
         
-        navigationItem.title = "Goal"
-        navigationController?.title = "Goal"
+        navigationItem.title = "Daily Goal"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         self.setGoalOutlet.applyStyle(title: "Set goal", normalColor: .white, highlightedColor: .gray)
@@ -38,7 +37,7 @@ class GoalVC: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func setGoalButton(_ sender: UIButton) {
+    @IBAction func setGoalAction(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Set goal", message: nil, preferredStyle: .alert)
         let actionButton = UIAlertAction(title: "Set", style: .default) { _ in
             let customeGoal = alertController.textFields?.first?.text ?? ""
@@ -61,7 +60,7 @@ class GoalVC: UIViewController {
         present(alertController, animated: true)
     }
     
-    @IBAction func resetToDefaultButton(_ sender: UIButton) {
+    @IBAction func resetToDefaultAction(_ sender: UIButton) {
         let resetAction = UIAlertAction(title: "Reset", style: .destructive) { _ in
             UserDefaults.standard.set(DrinkManager.shared.defaultGoal, forKey: UserDefaultsKeys.goal.rawValue)
             self.goalLabel.text = "Current goal is \(UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue))ml"

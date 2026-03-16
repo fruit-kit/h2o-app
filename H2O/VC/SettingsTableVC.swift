@@ -11,7 +11,7 @@ class SettingsTableVC: UITableViewController {
     
     let settings: [SettingModal] = [
         SettingModal(settingImage: UIImage(systemName: "bell.fill"), settingName: "Reminders"),
-        SettingModal(settingImage: UIImage(systemName: "star.fill"), settingName: "Daily goal")
+        SettingModal(settingImage: UIImage(systemName: "star.fill"), settingName: "Daily Goal")
     ]
 
     override func viewDidLoad() {
@@ -46,6 +46,20 @@ class SettingsTableVC: UITableViewController {
         cell.settingName.text = settings[indexPath.row].settingName
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let notificationsVC = NotificationsVC(nibName: "NotificationsVC", bundle: Bundle.main)
+            navigationController?.pushViewController(notificationsVC, animated: true)
+        case 1:
+            let goalVC = DailyGoalVC(nibName: "DailyGoalVC", bundle: Bundle.main)
+            navigationController?.pushViewController(goalVC, animated: true)
+        default:
+            break
+        }
+        
     }
 
 }
