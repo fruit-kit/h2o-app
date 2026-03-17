@@ -112,12 +112,7 @@ class DrinkManager {
         if index == 0, Calendar.current.isDateInToday(updatedEntry.date) { lastAdd = updatedEntry.volume
         }
         
-        currentVolume = drinkEntrys.filter { drinkEntry in
-            Calendar.current.isDateInToday(drinkEntry.date)
-        }.reduce(0) { sum, drinkEntry in
-            sum + drinkEntry.volume
-        }
-        
+        recalculateCurrentVolume()
         saveHistory()
     }
     
@@ -144,11 +139,19 @@ class DrinkManager {
     func checkDate() {
         let lastOpenDate = UserDefaults.standard.object(forKey: UserDefaultsKeys.lastOpenDate.rawValue) as? Date ?? Date()
         guard Calendar.current.isDateInToday(lastOpenDate) else {
-            self.currentVolume = 0
+            recalculateCurrentVolume()
             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
             return
         }
         UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.lastOpenDate.rawValue)
+    }
+    
+    func recalculateCurrentVolume() {
+        currentVolume = drinkEntrys.filter { drinkEntry in
+            Calendar.current.isDateInToday(drinkEntry.date)
+        }.reduce(0) { sum, drinkEntry in
+            sum + drinkEntry.volume
+        }
     }
     
 }
