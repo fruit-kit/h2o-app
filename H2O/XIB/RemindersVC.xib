@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationsVC" customModule="H2O" customModuleProvider="target">
             <connections>
+                <outlet property="datePickerOutlet" destination="AdS-MH-czW" id="hWy-k1-hJ4"/>
                 <outlet property="frequencyLabel" destination="UWb-MY-bfg" id="o4O-P8-aLb"/>
                 <outlet property="reminderLabelOutlet" destination="2TY-jn-kez" id="AQu-pX-MBs"/>
                 <outlet property="reminderSwitcherOutlet" destination="43h-or-UGV" id="IKk-ng-3Hx"/>
@@ -53,11 +54,14 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqh-RT-FVy">
                                             <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="116"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="5" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdS-MH-czW">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdS-MH-czW">
                                                     <rect key="frame" x="8" y="8" width="172.33333333333334" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="2eO-p4-NoE"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="datePickerAction:" destination="-1" eventType="valueChanged" id="NKi-Zg-4gv"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

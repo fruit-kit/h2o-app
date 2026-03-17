@@ -18,14 +18,14 @@ class NotificationManager {
         }
     }
     
-    func sendNotification() {
+    func sendNotification(with timeInterval: TimeInterval) {
         let content = UNMutableNotificationContent()
         content.title = "Water reminder"
         content.body = "It's time to drink some water."
         content.sound = .default
         
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: 60,
+            timeInterval: timeInterval,
             repeats: true
         )
         
