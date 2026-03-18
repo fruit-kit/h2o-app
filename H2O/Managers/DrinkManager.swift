@@ -23,11 +23,14 @@ class DrinkManager {
     
     var currentGoal: Int {
         let goal = UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
-        guard goal > 0 else {
-            UserDefaults.standard.set(defaultGoal, forKey: UserDefaultsKeys.goal.rawValue)
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
+        
+        if goal > 0 {
+            return goal
         }
-        return goal
+        
+        UserDefaults.standard.set(defaultGoal, forKey: UserDefaultsKeys.goal.rawValue)
+        
+        return defaultGoal
     }
     
     var currentVolume: Int {
