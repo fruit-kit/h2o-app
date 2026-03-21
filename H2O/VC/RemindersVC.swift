@@ -37,7 +37,7 @@ class RemindersVC: UIViewController {
     
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
         let interval = sender.countDownDuration
-        UserDefaults.standard.set(interval, forKey: "intervalReminder")
+        UserDefaults.standard.set(interval, forKey: UserDefaultsKeys.intervalReminder.rawValue)
         if reminderSwitcherOutlet.isOn {
             NotificationManager.shared.removeNotification()
             NotificationManager.shared.sendNotification(with: interval)

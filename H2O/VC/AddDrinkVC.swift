@@ -83,6 +83,13 @@ class AddDrinkVC: UIViewController {
         case .add:
             DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
             addDrinkDelegate?.didAddDrink()
+            
+            NotificationManager.shared.removeNotification()
+            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.waterReminder.rawValue),
+               let timeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.intervalReminder.rawValue) as? TimeInterval {
+                NotificationManager.shared.sendNotification(with: timeInterval)
+            }
+            
             dismiss(animated: true)
         case .edit(let index):
             DrinkManager.shared.updateDrinkEntry(at: index, volume: ml, drink: selectedDrink)
