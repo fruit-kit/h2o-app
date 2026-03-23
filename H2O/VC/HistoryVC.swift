@@ -90,7 +90,15 @@ extension HistoryVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { 2 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        DrinkManager.shared.drinkEntrys.count
+        
+        if section == 0 {
+            let todayEntries = entries(for: 0)
+            return todayEntries.count
+        }
+        
+        let earlierEntries = entries(for: 1)
+        return earlierEntries.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,10 +111,20 @@ extension HistoryVC: UITableViewDataSource {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
-        cell.dateLabel.text = "Date: \(dateFormatter.string(from:DrinkManager.shared.drinkEntrys[indexPath.row].date))"
-        cell.timeLabel.text = "Time: \(timeFormatter.string(from:DrinkManager.shared.drinkEntrys[indexPath.row].date))"
-        cell.volumeLable.text = "Volume: \(DrinkManager.shared.drinkEntrys[indexPath.row].volume)ml"
-        cell.typeLabel.text = "Type: \(DrinkManager.shared.drinkEntrys[indexPath.row].type)"
+        if indexPath.section == 0 {
+            let todayEntries = entries(for: 0)
+            cell.dateLabel.text = "Date: \(dateFormatter.string(from: todayEntries[indexPath.row].date))"
+            cell.timeLabel.text = "Time: \(timeFormatter.string(from: todayEntries[indexPath.row].date))"
+            cell.volumeLable.text = "Volume: \(todayEntries[indexPath.row].volume)ml"
+            cell.typeLabel.text = "Type: \(todayEntries[indexPath.row].type)"
+            return cell
+        }
+        
+        let earlierEntries = entries(for: 1)
+        cell.dateLabel.text = "Date: \(dateFormatter.string(from: earlierEntries[indexPath.row].date))"
+        cell.timeLabel.text = "Time: \(timeFormatter.string(from: earlierEntries[indexPath.row].date))"
+        cell.volumeLable.text = "Volume: \(earlierEntries[indexPath.row].volume)ml"
+        cell.typeLabel.text = "Type: \(earlierEntries[indexPath.row].type)"
         return cell
     }
     
@@ -116,6 +134,18 @@ extension HistoryVC: UITableViewDataSource {
             return "Today"
         }
         return "Earlier"
+        
+    }
+    
+    private func entries(for section: Int) -> [DrinkEntry] {
+        
+        if section == 0 {
+            let todayEntries = DrinkManager.shared.drinkEntrys.filter { Calendar.current.isDateInToday($0.date) }
+            return todayEntries
+        }
+        
+        let earlierEntries = DrinkManager.shared.drinkEntrys.filter { !Calendar.current.isDateInToday($0.date) }
+        return earlierEntries
         
     }
     
