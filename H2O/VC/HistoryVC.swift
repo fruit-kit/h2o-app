@@ -60,35 +60,38 @@ class HistoryVC: UIViewController {
 extension HistoryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let drinkEntries = self.entries(for: indexPath.section)
+        let drinkEntry = drinkEntries[indexPath.row]
+        
         let editContextualAction = UIContextualAction(style: .normal, title: "Edit") { _ , _, completion in
-            
-            let index = indexPath.row
-            
-            let todayEntries = self.entries(for: 0)
-            let earlierEntries = self.entries(for: 1)
             
             let addDrinkVC = AddDrinkVC(nibName: "AddDrinkVC", bundle: Bundle.main)
             
-            if indexPath.section == 0 {
-                addDrinkVC.presentVolume = todayEntries[index].volume
-                addDrinkVC.selectedDrink = todayEntries[index].type
+            if let realIndex = DrinkManager.shared.drinkEntrys.firstIndex(where: { $0 == drinkEntry }) {
+                
+                addDrinkVC.presentVolume = drinkEntry.volume
+                addDrinkVC.selectedDrink = drinkEntry.type
+                
+                addDrinkVC.mode = .edit(index: realIndex)
+                addDrinkVC.delegateHistoryVC = self
+                
+                self.present(addDrinkVC, animated: true)
+                completion(true)
             } else {
-                addDrinkVC.presentVolume = earlierEntries[index].volume
-                addDrinkVC.selectedDrink = earlierEntries[index].type
+                completion(false)
             }
-            
-            addDrinkVC.mode = .edit(index: index)
-            addDrinkVC.delegateHistoryVC = self
-            self.present(addDrinkVC, animated: true)
-            completion(true)
-            
+
         }
         
         let deleteContextualAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
-                let index = indexPath.row
-                DrinkManager.shared.deleteDrinkEntry(at: index)
+                
+                if let realIndex = DrinkManager.shared.drinkEntrys.firstIndex(where: { $0 == drinkEntry }) {
+                    DrinkManager.shared.deleteDrinkEntry(at: realIndex)
+                }
+                
                 self.tableView.reloadData()
             }
             
