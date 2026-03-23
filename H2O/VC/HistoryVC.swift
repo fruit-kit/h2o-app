@@ -87,7 +87,7 @@ extension HistoryVC: UITableViewDelegate {
 
 extension HistoryVC: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    func numberOfSections(in tableView: UITableView) -> Int { 2 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         DrinkManager.shared.drinkEntrys.count
@@ -108,6 +108,15 @@ extension HistoryVC: UITableViewDataSource {
         cell.volumeLable.text = "Volume: \(DrinkManager.shared.drinkEntrys[indexPath.row].volume)ml"
         cell.typeLabel.text = "Type: \(DrinkManager.shared.drinkEntrys[indexPath.row].type)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 0 {
+            return "Today"
+        }
+        return "Earlier"
+        
     }
     
 }
