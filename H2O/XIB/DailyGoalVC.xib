@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DailyGoalVC" customModule="H2O" customModuleProvider="target">
             <connections>
                 <outlet property="goalLabel" destination="hhA-r2-2Co" id="yIg-B6-A6n"/>
+                <outlet property="goalRecommendationLabel" destination="fHt-Fq-Yyg" id="98H-Xn-UVr"/>
                 <outlet property="resetToDefaultOutlet" destination="6Qg-7b-fto" id="ain-pk-lSJ"/>
                 <outlet property="setGoalOutlet" destination="Hcn-QC-qPp" id="AhL-aJ-8ng"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,16 +23,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2IA-8V-Mka">
-                    <rect key="frame" x="0.0" y="118" width="393" height="206"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="272"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxj-mL-Rl1">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="74"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhA-r2-2Co">
                                     <rect key="frame" x="16" y="16" width="361" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="RMD-hj-0TI"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -45,8 +43,29 @@
                                 <constraint firstItem="hhA-r2-2Co" firstAttribute="top" secondItem="Mxj-mL-Rl1" secondAttribute="top" constant="16" id="swi-cO-pWB"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frg-cc-z34">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wfy-xg-0DR">
                             <rect key="frame" x="0.0" y="74" width="393" height="66"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHt-Fq-Yyg">
+                                    <rect key="frame" x="16" y="8" width="361" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="VdI-0P-V1Y"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="fHt-Fq-Yyg" secondAttribute="bottom" constant="8" id="RMD-Cd-xMe"/>
+                                <constraint firstItem="fHt-Fq-Yyg" firstAttribute="top" secondItem="Wfy-xg-0DR" secondAttribute="top" constant="8" id="ZiF-Gf-l3W"/>
+                                <constraint firstAttribute="trailing" secondItem="fHt-Fq-Yyg" secondAttribute="trailing" constant="16" id="rCq-aN-OQp"/>
+                                <constraint firstItem="fHt-Fq-Yyg" firstAttribute="leading" secondItem="Wfy-xg-0DR" secondAttribute="leading" constant="16" id="s1f-bH-1Kv"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frg-cc-z34">
+                            <rect key="frame" x="0.0" y="140" width="393" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcn-QC-qPp">
                                     <rect key="frame" x="16" y="8" width="361" height="50"/>
@@ -69,7 +88,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRf-cE-yYb">
-                            <rect key="frame" x="0.0" y="140" width="393" height="66"/>
+                            <rect key="frame" x="0.0" y="206" width="393" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qg-7b-fto">
                                     <rect key="frame" x="16" y="8" width="361" height="50"/>

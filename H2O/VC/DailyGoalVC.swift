@@ -12,6 +12,7 @@ class DailyGoalVC: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var goalLabel: UILabel!
+    @IBOutlet weak var goalRecommendationLabel: UILabel!
     @IBOutlet weak var setGoalOutlet: UIButton!
     @IBOutlet weak var resetToDefaultOutlet: UIButton!
     
@@ -29,6 +30,9 @@ class DailyGoalVC: UIViewController {
         
         navigationItem.title = "Daily Goal"
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.goalRecommendationLabel.text = "Tip: ~30 ml × body weight = daily goal"
+        self.goalRecommendationLabel.textColor = .gray
         
         self.setGoalOutlet.applyStyle(title: "Set goal", normalColor: .white, highlightedColor: .gray)
         self.resetToDefaultOutlet.applyStyle(title: "Reset to default", normalColor: .systemPink, highlightedColor: .gray)
