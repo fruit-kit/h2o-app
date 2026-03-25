@@ -42,6 +42,10 @@ class DrinkManager {
         }
     }
     
+    var isGoalReached: Bool {
+        currentVolume >= currentGoal
+    }
+    
     var lastAdd: Int {
         get {
             UserDefaults.standard.integer(forKey: UserDefaultsKeys.lastAdd.rawValue)
@@ -57,7 +61,7 @@ class DrinkManager {
     
     func addDrink(amount: Int, drink: DrinkType) {
         lastAdd = amount
-        self.drinkEntrys.insert(DrinkEntry(date: Date(), volume: lastAdd, type: drink, id: UUID()), at: 0)
+        drinkEntrys.insert(DrinkEntry(date: Date(), volume: lastAdd, type: drink, id: UUID()), at: 0)
         recalculateCurrentVolume()
         saveHistory()
     }

@@ -43,16 +43,16 @@ class HomeVC: UIViewController {
     }
     
     private func setupProgressLabel() {
-        self.progressLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
+        progressLabel.font = .systemFont(ofSize: CGFloat(23), weight: .bold)
     }
     
     private func setupButtons() {
-        self.drink100MlOutlet.applyStyle(title: "Drink 100ml", normalColor: .white, highlightedColor: .gray)
-        self.drink200MlOutlet.applyStyle(title: "Drink 200ml", normalColor: .white, highlightedColor: .gray)
-        self.drink300MlOutlet.applyStyle(title: "Drink 300ml", normalColor: .white, highlightedColor: .gray)
-        self.customeVolumeOutlet.applyStyle(title: "Custome volume", normalColor: .white, highlightedColor: .gray)
-        self.undoLastOutlet.applyStyle(title: "Undo last add", normalColor: .systemPink, highlightedColor: .gray)
-        self.resetAllDayOutlet.applyStyle(title: "Reset all day", normalColor: .systemPink, highlightedColor: .gray)
+        drink100MlOutlet.applyStyle(title: "Drink 100ml", normalColor: .white, highlightedColor: .gray)
+        drink200MlOutlet.applyStyle(title: "Drink 200ml", normalColor: .white, highlightedColor: .gray)
+        drink300MlOutlet.applyStyle(title: "Drink 300ml", normalColor: .white, highlightedColor: .gray)
+        customeVolumeOutlet.applyStyle(title: "Custome volume", normalColor: .white, highlightedColor: .gray)
+        undoLastOutlet.applyStyle(title: "Undo last add", normalColor: .systemPink, highlightedColor: .gray)
+        resetAllDayOutlet.applyStyle(title: "Reset all day", normalColor: .systemPink, highlightedColor: .gray)
     }
     
     private func updateProgressLabel() {
@@ -91,22 +91,28 @@ class HomeVC: UIViewController {
     }
     
     @IBAction func undoLastButton(_ sender: UIButton) {
+        
         let undoAction = UIAlertAction(title: "Undo", style: .destructive) { _ in
             DrinkManager.shared.undoLast()
             self.updateProgressLabel()
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         showAlert(title: "Undo last drink?",
                           message: "This action can't be undone.",
                           actions: [undoAction, cancelAction])
     }
     
     @IBAction func resetAllDayButton(_ sender: UIButton) {
+        
         let resetAction = UIAlertAction(title: "Reset", style: .destructive) { _ in
             DrinkManager.shared.resetDay()
             self.updateProgressLabel()
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         showAlert(title: "Reset today's progress?", message: "This action can't be undone.", actions: [resetAction, cancelAction])
     }
     
@@ -118,6 +124,11 @@ extension HomeVC: AddDrinkDelegate {
     
     func didAddDrink() {
         updateProgressLabel()
+        
+        if DrinkManager.shared.isGoalReached {
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            showAlert(title: "✅ Goal reached", message: "You have reached your daily goal.", actions: [okAction])
+        }
     }
     
 }

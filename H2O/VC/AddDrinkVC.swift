@@ -73,28 +73,33 @@ class AddDrinkVC: UIViewController {
     // MARK: - Actions
     
     @IBAction func addDrinkEntryAction(_ sender: UIButton) {
+        
         guard let text = textFieldOutlet.text,
               let ml = Int(text),
               ml > 0 else {
             dismiss(animated: true)
             return
         }
+        
         switch mode {
         case .add:
             DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
-            addDrinkDelegate?.didAddDrink()
             
             NotificationManager.shared.removeNotification()
             if DrinkManager.shared.currentVolume < DrinkManager.shared.currentGoal && UserDefaults.standard.bool(forKey: UserDefaultsKeys.waterReminder.rawValue),
                let timeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.intervalReminder.rawValue) as? TimeInterval {
                 NotificationManager.shared.sendNotification(with: timeInterval)
             }
+            dismiss(animated: true) {
+                self.addDrinkDelegate?.didAddDrink()
+            }
             
-            dismiss(animated: true)
         case .edit(let index):
             DrinkManager.shared.updateDrinkEntry(at: index, volume: ml, drink: selectedDrink)
             delegateHistoryVC?.didEditDrink()
-            dismiss(animated: true)
+            dismiss(animated: true) {
+                self.addDrinkDelegate?.didAddDrink()
+            }
         }
     }
     
