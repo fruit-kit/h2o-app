@@ -159,4 +159,23 @@ class DrinkManager {
         }
     }
     
+    func entries(for section: Int) -> [DrinkEntry] {
+        if section == 0 {
+            let todayEntries = DrinkManager.shared.drinkEntrys.filter { Calendar.current.isDateInToday($0.date)
+            }
+            return todayEntries
+        }
+        
+        if section == 1 {
+            let yesterdayEntries = DrinkManager.shared.drinkEntrys.filter {
+                Calendar.current.isDateInYesterday($0.date)
+            }
+            return yesterdayEntries
+        }
+        
+        let earlierEntries = DrinkManager.shared.drinkEntrys.filter { !Calendar.current.isDateInToday($0.date) && !Calendar.current.isDateInYesterday($0.date)
+        }
+        return earlierEntries
+    }
+    
 }

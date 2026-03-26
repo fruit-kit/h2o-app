@@ -61,7 +61,7 @@ extension HistoryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let drinkEntries = self.entries(for: indexPath.section)
+        let drinkEntries = DrinkManager.shared.entries(for: indexPath.section)
         let drinkEntry = drinkEntries[indexPath.row]
         
         let editContextualAction = UIContextualAction(style: .normal, title: "Edit") { _ , _, completion in
@@ -112,7 +112,7 @@ extension HistoryVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return entries(for: section).count
+        return DrinkManager.shared.entries(for: section).count
         
     }
     
@@ -127,7 +127,7 @@ extension HistoryVC: UITableViewDataSource {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
-        let drinkEntries = entries(for: indexPath.section)
+        let drinkEntries = DrinkManager.shared.entries(for: indexPath.section)
         let entry = drinkEntries[indexPath.row]
         
             cell.dateLabel.text = "Date: \(dateFormatter.string(from: entry.date))"
@@ -149,27 +149,6 @@ extension HistoryVC: UITableViewDataSource {
         }
         
         return "Earlier"
-        
-    }
-    
-    private func entries(for section: Int) -> [DrinkEntry] {
-        
-        if section == 0 {
-            let todayEntries = DrinkManager.shared.drinkEntrys.filter { Calendar.current.isDateInToday($0.date)
-            }
-            return todayEntries
-        }
-        
-        if section == 1 {
-            let yesterdayEntries = DrinkManager.shared.drinkEntrys.filter {
-                Calendar.current.isDateInYesterday($0.date)
-            }
-            return yesterdayEntries
-        }
-        
-        let earlierEntries = DrinkManager.shared.drinkEntrys.filter { !Calendar.current.isDateInToday($0.date) && !Calendar.current.isDateInYesterday($0.date)
-        }
-        return earlierEntries
         
     }
     
