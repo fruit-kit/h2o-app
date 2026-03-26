@@ -9,6 +9,8 @@ import UIKit
 
 class AboutVC: UIViewController {
 
+    // MARK: - Outlets
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var h2oLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
@@ -20,6 +22,8 @@ class AboutVC: UIViewController {
     @IBOutlet weak var githubLabel: UILabel!
     @IBOutlet weak var emailImage: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,8 @@ class AboutVC: UIViewController {
         setupGitHubButton()
         setupEmailButton()
     }
+    
+    // MARK: - Methods
     
     private func setupImageLogo() {
         image.image = UIImage(named: "logo")
@@ -74,6 +80,8 @@ class AboutVC: UIViewController {
         emailImage.image = UIImage(systemName: "envelope.fill")
         emailLabel.text = "Contact Us"
     }
+    
+    // MARK: - Actions
     
     @IBAction func developerAction(_ sender: UIButton) {
         let username = "fruitkit"
