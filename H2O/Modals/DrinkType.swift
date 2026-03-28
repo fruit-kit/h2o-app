@@ -9,7 +9,9 @@ enum DrinkType: String, Codable, CaseIterable {
     case tea
     case protein
     case milk
+    case kefir
     case coffee
+    case cocoa
     case juice
     case smoothie
     case other
