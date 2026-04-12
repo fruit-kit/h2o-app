@@ -16,8 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         DrinkManager.shared.loadHistory()
         DrinkManager.shared.checkDate()
-        let context = PersistenceController.shared.container.viewContext
-            print("CoreData OK: ", context)
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
