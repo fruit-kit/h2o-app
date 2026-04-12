@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class DrinkManager {
     
@@ -20,6 +21,10 @@ class DrinkManager {
     var defaultGoal = 2_000
     
     // MARK: - Computed properties
+    
+    var context: NSManagedObjectContext {
+        PersistenceController.shared.container.viewContext
+    }
     
     var currentGoal: Int {
         let goal = UserDefaults.standard.integer(forKey: UserDefaultsKeys.goal.rawValue)
@@ -58,6 +63,22 @@ class DrinkManager {
     // MARK: - Methods
     
     // MARK: Drink actions
+    
+    func saveDrinkToCoreData(amount: Int, drink: DrinkType) {
+        let entry = DrinkEntity(context: context)
+        entry.id = UUID()
+        entry.date = Date()
+        entry.volume = Int32(amount)
+        entry.type = drink.rawValue
+        
+        do {
+            try context.save()
+            print("Saved to Core Data")
+        }
+        catch {
+            print("Failed to save to Core Data", error)
+        }
+    }
     
     func addDrink(amount: Int, drink: DrinkType) {
         lastAdd = amount
