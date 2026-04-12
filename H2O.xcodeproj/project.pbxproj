@@ -14,17 +14,29 @@
 		DA8E60D52F542C2800816E11 /* Exceptions for "H2O" folder in "H2O" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				CoreData/DrinkModel.xcdatamodeld,
 				Resources/Info.plist,
 			);
 			target = DA8E60C22F542C2700816E11 /* H2O */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		DAC9BD7A2F8B7BBA0056015B /* Exceptions for "H2O" folder in "Compile Sources" phase from "H2O" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = DA8E60BF2F542C2700816E11 /* Sources */;
+			membershipExceptions = (
+				CoreData/DrinkModel.xcdatamodeld,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DA8E60C52F542C2700816E11 /* H2O */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				DA8E60D52F542C2800816E11 /* Exceptions for "H2O" folder in "H2O" target */,
+				DAC9BD7A2F8B7BBA0056015B /* Exceptions for "H2O" folder in "Compile Sources" phase from "H2O" target */,
 			);
 			path = H2O;
 			sourceTree = "<group>";
