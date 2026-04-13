@@ -174,9 +174,20 @@ class DrinkManager {
     }
     
     func clearAllHistory() {
-        self.lastAdd = 0
-        self.drinkEntrys.removeAll()
+        let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
+        do {
+            let result = try context.fetch(request)
+            for entity in result {
+                context.delete(entity)
+            }
+            try context.save()
+        }
+        catch {
+            print("Clear all history error: ", error)
+        }
+        loadHistory()
         recalculateCurrentVolume()
+        self.lastAdd = 0
     }
     
     // MARK: Day actions
