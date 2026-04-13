@@ -64,7 +64,7 @@ class DrinkManager {
     
     // MARK: Drink actions
     
-    func saveDrinkToCoreData(amount: Int, drink: DrinkType) {
+    func addDrink(amount: Int, drink: DrinkType) {
         let entry = DrinkEntity(context: context)
         entry.id = UUID()
         entry.date = Date()
@@ -73,29 +73,34 @@ class DrinkManager {
         
         do {
             try context.save()
-            print("Saved to Core Data")
+            loadHistory()
+            recalculateCurrentVolume()
         }
         catch {
             print("Failed to save to Core Data", error)
         }
     }
     
-    func addDrink(amount: Int, drink: DrinkType) {
-        lastAdd = amount
-        drinkEntrys.insert(DrinkEntry(date: Date(), volume: lastAdd, type: drink, id: UUID()), at: 0)
-        recalculateCurrentVolume()
-        saveHistory()
-    }
-    
     func undoLast() {
-        guard lastAdd != 0,
-        !drinkEntrys.isEmpty else {
-            return
+        guard !drinkEntrys.isEmpty else { return }
+        let id = drinkEntrys[0].id
+        let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let result = try context.fetch(request)
+            
+            if let entity = result.first {
+                context.delete(entity)
+                try context.save()
+                loadHistory()
+                recalculateCurrentVolume()
+                lastAdd = 0
+            }
         }
-        drinkEntrys.remove(at: 0)
-        recalculateCurrentVolume()
-        lastAdd = 0
-        saveHistory()
+        catch {
+            print(error)
+        }
     }
     
     func deleteDrinkEntry(at index: Int) {
@@ -107,20 +112,28 @@ class DrinkManager {
         }
         drinkEntrys.remove(at: index)
         recalculateCurrentVolume()
-        saveHistory()
     }
     
     // MARK: History actions
     
-    func saveHistory() {
-        let data = try? JSONEncoder().encode(self.drinkEntrys)
-        UserDefaults.standard.set(data, forKey: UserDefaultsKeys.drinkEntrys.rawValue)
-    }
-    
     func loadHistory() {
-        if let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.drinkEntrys.rawValue),
-           let decodedData = try? JSONDecoder().decode([DrinkEntry].self, from: data) {
-            self.drinkEntrys = decodedData
+        let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        do {
+            let result = try context.fetch(request)
+            self.drinkEntrys = result.compactMap { entity in
+                guard let date = entity.date,
+                      let id = entity.id,
+                      let typeString = entity.type,
+                      let type = DrinkType(rawValue: typeString) else {
+                    return nil
+                }
+                return DrinkEntry(date: date, volume: Int(entity.volume), type: type, id: id)
+            }
+        }
+        catch {
+            print(error)
         }
     }
     
@@ -139,14 +152,12 @@ class DrinkManager {
         }
         
         recalculateCurrentVolume()
-        saveHistory()
     }
     
     func clearAllHistory() {
         self.lastAdd = 0
         self.drinkEntrys.removeAll()
         recalculateCurrentVolume()
-        self.saveHistory()
     }
     
     // MARK: Day actions
@@ -157,7 +168,6 @@ class DrinkManager {
             Calendar.current.isDateInToday($0.date)
         }
         recalculateCurrentVolume()
-        self.saveHistory()
     }
     
     // MARK: Date logick

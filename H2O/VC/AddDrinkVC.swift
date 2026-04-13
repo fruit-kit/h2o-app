@@ -84,7 +84,6 @@ class AddDrinkVC: UIViewController {
         switch mode {
         case .add:
             DrinkManager.shared.addDrink(amount: ml, drink: selectedDrink)
-            
             NotificationManager.shared.removeNotification()
             if DrinkManager.shared.currentVolume < DrinkManager.shared.currentGoal && UserDefaults.standard.bool(forKey: UserDefaultsKeys.waterReminder.rawValue),
                let timeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.intervalReminder.rawValue) as? TimeInterval {
