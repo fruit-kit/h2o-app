@@ -60,8 +60,6 @@ class DrinkManager {
         }
     }
     
-    // MARK: - Methods
-    
     // MARK: Drink actions
     
     func addDrink(amount: Int, drink: DrinkType) {
@@ -104,14 +102,35 @@ class DrinkManager {
     }
     
     func deleteDrinkEntry(at index: Int) {
-        guard drinkEntrys.indices.contains(index) else {
-            return
+        guard drinkEntrys.indices.contains(index) else { return }
+        
+        let id = drinkEntrys[index].id
+        
+        let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
+        
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            
+            let result = try context.fetch(request)
+            
+            guard let entity = result.first else { return }
+            
+                context.delete(entity)
+            
+                try context.save()
+            
+                loadHistory()
+                recalculateCurrentVolume()
+            
+                if index == 0 {
+                    lastAdd = 0
+                }
+            
         }
-        if index == 0 {
-            lastAdd = 0
+        catch {
+            print("Delete error: ", error)
         }
-        drinkEntrys.remove(at: index)
-        recalculateCurrentVolume()
     }
     
     // MARK: History actions
