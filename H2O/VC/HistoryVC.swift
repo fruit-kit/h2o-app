@@ -52,7 +52,7 @@ class HistoryVC: UIViewController {
  
     @IBAction func clearHistoryAction(_ sender: UIButton) {
         let clearAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
-            DrinkManager.shared.clearAllHistory()
+            DrinkManager.shared.clearHistory()
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

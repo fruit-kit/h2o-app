@@ -17,7 +17,7 @@ struct PersistenceController {
         
         container.loadPersistentStores { _ , error in
             if let error {
-                fatalError("CoreData error: \(error)")
+                fatalError("CoreData error: \(error.localizedDescription)")
             }
         }
     }

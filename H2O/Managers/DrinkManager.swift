@@ -63,11 +63,11 @@ class DrinkManager {
     // MARK: Drink actions
     
     func addDrink(amount: Int, drink: DrinkType) {
-        let entry = DrinkEntity(context: context)
-        entry.id = UUID()
-        entry.date = Date()
-        entry.volume = Int32(amount)
-        entry.type = drink.rawValue
+        let entity = DrinkEntity(context: context)
+        entity.id = UUID()
+        entity.date = Date()
+        entity.volume = Int32(amount)
+        entity.type = drink.rawValue
         
         do {
             try context.save()
@@ -75,7 +75,7 @@ class DrinkManager {
             recalculateCurrentVolume()
         }
         catch {
-            print("Failed to save to Core Data", error)
+            print("Failed to save to Core Data:", error.localizedDescription)
         }
     }
     
@@ -97,7 +97,7 @@ class DrinkManager {
             }
         }
         catch {
-            print(error)
+            print("Undo last error:", error.localizedDescription)
         }
     }
     
@@ -129,7 +129,7 @@ class DrinkManager {
             
         }
         catch {
-            print("Delete error: ", error)
+            print("Delete drink entry error:", error.localizedDescription)
         }
     }
     
@@ -152,7 +152,7 @@ class DrinkManager {
             }
         }
         catch {
-            print(error)
+            print("Load history error:", error.localizedDescription)
         }
     }
     
@@ -182,11 +182,11 @@ class DrinkManager {
             loadHistory()
         }
         catch {
-            print("Update drink entry error: ", error)
+            print("Update drink entry error:", error.localizedDescription)
         }
     }
     
-    func clearAllHistory() {
+    func clearHistory() {
         let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
         do {
             let result = try context.fetch(request)
@@ -196,7 +196,7 @@ class DrinkManager {
             try context.save()
         }
         catch {
-            print("Clear all history error: ", error)
+            print("Clear history error:", error.localizedDescription)
         }
         loadHistory()
         recalculateCurrentVolume()
@@ -222,7 +222,7 @@ class DrinkManager {
             recalculateCurrentVolume()
         }
         catch {
-            print("Reset day error: ", error)
+            print("Reset day error:", error.localizedDescription)
         }
     }
     
