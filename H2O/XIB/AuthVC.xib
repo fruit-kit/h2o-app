@@ -9,6 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthVC" customModule="H2O" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextField" destination="hsK-Vl-PCR" id="Ll7-pc-fFc"/>
+                <outlet property="label" destination="jsh-qn-1rk" id="2ei-Xh-LD6"/>
+                <outlet property="loginButton" destination="ufy-UK-FuV" id="19y-Th-bqH"/>
+                <outlet property="nameTextField" destination="k9S-tE-GKI" id="ATR-24-UNR"/>
+                <outlet property="passwordTextField" destination="EDp-9z-MAy" id="Tqc-dh-I0A"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -49,7 +54,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="CB1-AR-ZBy"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your full name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9S-tE-GKI">
@@ -57,7 +62,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="MpL-0L-qfR"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create your password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EDp-9z-MAy">
@@ -65,7 +70,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Ukt-1O-rs7"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
@@ -92,7 +97,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBP-Jj-4Mx">
                                     <rect key="frame" x="16" y="8" width="361" height="112"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -109,12 +114,17 @@
                             <rect key="frame" x="0.0" y="438" width="393" height="46"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufy-UK-FuV">
-                                    <rect key="frame" x="163.66666666666666" y="8" width="65.666666666666657" height="30"/>
+                                    <rect key="frame" x="160.33333333333334" y="8" width="72.333333333333343" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="bAS-PJ-PIB"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Login">
+                                        <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="login:" destination="-1" eventType="touchUpInside" id="dAL-QV-hqP"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
