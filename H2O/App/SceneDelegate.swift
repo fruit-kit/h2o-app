@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+    
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         DrinkManager.shared.loadHistory()
         DrinkManager.shared.checkDate()
@@ -20,40 +21,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let authVC = AuthVC(nibName: "AuthVC", bundle: Bundle.main)
-        window.rootViewController = authVC
+        var rootVC: UIViewController
         
+        if Auth.auth().currentUser == nil {
+            let authVC = AuthVC(nibName: "AuthVC", bundle: nil)
+            rootVC = authVC
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeVC = storyboard.instantiateViewController(identifier: "HomeVC") as! HomeVC
+            rootVC = homeVC
+        }
+        window.rootViewController = rootVC
         self.window = window
         window.makeKeyAndVisible()
+        
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
-
+    
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) {
         DrinkManager.shared.checkDate()
     }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    
+    
 }
 

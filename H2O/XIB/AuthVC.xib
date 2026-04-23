@@ -14,6 +14,7 @@
                 <outlet property="loginButton" destination="ufy-UK-FuV" id="19y-Th-bqH"/>
                 <outlet property="nameTextField" destination="k9S-tE-GKI" id="ATR-24-UNR"/>
                 <outlet property="passwordTextField" destination="EDp-9z-MAy" id="Tqc-dh-I0A"/>
+                <outlet property="statusLabel" destination="tBP-Jj-4Mx" id="TYQ-7E-OZK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -123,7 +124,7 @@
                                         <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                     </buttonConfiguration>
                                     <connections>
-                                        <action selector="login:" destination="-1" eventType="touchUpInside" id="dAL-QV-hqP"/>
+                                        <action selector="switchLogin:" destination="-1" eventType="touchUpInside" id="cdp-jB-yei"/>
                                     </connections>
                                 </button>
                             </subviews>
